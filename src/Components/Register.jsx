@@ -1,4 +1,6 @@
 import { useState } from "react"
+import userServices from "../services/userServices";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
 
@@ -6,10 +8,28 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleRegister = (e) => {
         e.preventDefault();
         
         // register the user
+        userServices.register(name, email, password)
+        .then(response => {
+            
+            alert(response.data.message);
+
+            // clear the form
+            setName('');
+            setEmail('');
+            setPassword('');
+
+            // redirect to login page
+            navigate('/login');
+        })
+        .catch(error => {
+            alert(error.response.data.message);
+        });
     }
 
   return (

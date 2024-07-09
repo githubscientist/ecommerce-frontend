@@ -1,14 +1,32 @@
 import { useState } from "react"
+import userServices from "../services/userServices";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleLogin = (e) => {
         e.preventDefault();
         
         // login the user
+        userServices.login(email, password)
+            .then(response => {
+                alert(response.data.message);
+
+                // clear the form
+                setEmail('');
+                setPassword('');
+
+                // redirect to dashboard page
+                navigate('/dashboard');
+            })
+            .catch(error => {
+                alert(error.response.data.message);
+            })
     }
 
   return (
