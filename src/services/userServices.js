@@ -1,4 +1,4 @@
-import { instance } from "./instance";
+import { instance, protectedInstance } from "./instance";
 
 // define the user services
 const userServices = {
@@ -21,6 +21,11 @@ const userServices = {
             withCredentials: true
         });
     },
+    // get the user
+    getUser: async () => {
+        // make a GET request to the server
+        return await protectedInstance.get('/users/profile');
+    }
 }
 
 export default userServices;

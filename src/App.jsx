@@ -4,6 +4,8 @@ import HomeWrapper from "./Wrappers/HomeWrapper";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import DashboardWrapper from "./Wrappers/DashboardWrapper";
+import ProtectedRoute from "./contexts/ProtectedRoute";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -26,12 +28,20 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardWrapper />
+    element: (
+      <ProtectedRoute>
+        <DashboardWrapper />
+      </ProtectedRoute>
+    )
   }
 ])
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  )
 }
 
 export default App;
