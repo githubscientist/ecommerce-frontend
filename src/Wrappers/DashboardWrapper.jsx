@@ -1,5 +1,6 @@
 import { Link, Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import userServices from "../services/userServices";
+import UserSidebar from "../components/UserSidebar";
 
 const DashboardWrapper = () => {
 
@@ -42,7 +43,15 @@ const DashboardWrapper = () => {
                   </div>
           </nav>
           
-          <Outlet />
+          <div className="row mt-5">
+              <div className="col-md-3">
+                  <UserSidebar />
+              </div>
+
+              <div className="col-md-9">
+                  <Outlet />
+                </div>
+          </div>
     </div>
   )
 }

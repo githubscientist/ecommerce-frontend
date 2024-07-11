@@ -1,5 +1,6 @@
 import { Link, Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import userServices from "../services/userServices";
+import Sidebar from "../components/Sidebar";
 
 const AdminDashboardWrapper = () => {
 
@@ -20,7 +21,7 @@ const AdminDashboardWrapper = () => {
   }
 
   return (
-    <div>
+    <div className="mx-2">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <div className="container-fluid">
                   <Link className="navbar-brand" to="/">Admin Dashboard</Link>
@@ -40,7 +41,15 @@ const AdminDashboardWrapper = () => {
                   </div>
           </nav>
           
-          <Outlet />
+          <div className="row mt-5">
+              <div className="col-md-3">
+                  <Sidebar />
+              </div>
+
+              <div className="col-md-9">
+                  <Outlet />
+                </div>
+          </div>
     </div>
   )
 }

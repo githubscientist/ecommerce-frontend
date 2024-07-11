@@ -8,6 +8,10 @@ import userLoaders from "./loaders/userLoaders";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import LoginRoute from "./Routes/LoginRoute";
 import AdminDashboardWrapper from "./Wrappers/AdminDashboardWrapper";
+import CreateProduct from "./components/CreateProduct";
+import AdminRoute from "./Routes/AdminRoute";
+import ViewProducts from "./components/ViewProducts";
+import productLoaders from "./loaders/productLoaders";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +48,13 @@ const router = createBrowserRouter([
         path: "",
         element: <DashboardWrapper />,
         loader: userLoaders.getUser,
+        children: [
+          {
+            path: "products",
+            element: <ViewProducts />,
+            loader: productLoaders.viewProducts
+          }
+        ]
       }
     ]
   },
@@ -54,8 +65,21 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AdminDashboardWrapper />,
+        element: <AdminRoute />,
         loader: userLoaders.getUser,
+        children: [
+          {
+            path: "",
+            element: <AdminDashboardWrapper />,
+            loader: userLoaders.getUser,
+            children: [
+              {
+                path: "products",
+                element: <CreateProduct />
+              }
+            ]
+          }
+        ]
       }
     ]
   }
