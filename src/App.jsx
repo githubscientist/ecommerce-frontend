@@ -7,6 +7,7 @@ import DashboardWrapper from "./Wrappers/DashboardWrapper";
 import userLoaders from "./loaders/userLoaders";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import LoginRoute from "./Routes/LoginRoute";
+import AdminDashboardWrapper from "./Wrappers/AdminDashboardWrapper";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,17 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <DashboardWrapper />
+      }
+    ]
+  },
+  {
+    path: "admin",
+    element: <ProtectedRoute />,
+    loader: userLoaders.checkAuth,
+    children: [
+      {
+        path: "",
+        element: <AdminDashboardWrapper />
       }
     ]
   }

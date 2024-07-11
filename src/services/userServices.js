@@ -28,6 +28,9 @@ const userServices = {
     },
     checkAuth: async () => {
         return await protectedInstance.get('/users/checkAuth');
+    },
+    logout: async () => {
+        return await protectedInstance.get('/users/logout');
     }
 }
 

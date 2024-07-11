@@ -8,6 +8,13 @@ const userLoaders = {
         } catch (error) {
             return false;
         }
+    },
+    getUser: async () => {
+        try {
+            return await userServices.getUser();
+        } catch (error) {
+            return null;
+        }
     }
 }
 

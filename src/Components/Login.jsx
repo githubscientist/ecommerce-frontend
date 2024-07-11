@@ -21,8 +21,12 @@ const Login = () => {
                 setEmail('');
                 setPassword('');
 
-                // redirect to dashboard page
-                navigate('/dashboard');
+                // redirect to dashboard or AdminDashboard
+                if(response.data.user.role === 'admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/dashboard');
+                }
             })
             .catch(error => {
                 alert(error.response.data.message);
