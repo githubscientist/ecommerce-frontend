@@ -4,44 +4,51 @@ import HomeWrapper from "./Wrappers/HomeWrapper";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import DashboardWrapper from "./Wrappers/DashboardWrapper";
-import ProtectedRoute from "./contexts/ProtectedRoute";
-import { AuthProvider } from "./contexts/AuthContext";
+import userLoaders from "./loaders/userLoaders";
+import ProtectedRoute from "./Routes/ProtectedRoute";
+import LoginRoute from "./Routes/LoginRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeWrapper />,
+    element: <LoginRoute />,
+    loader: userLoaders.checkAuth,
     children: [
       {
-        path: "/",
-        element: <Home />
-      },
-      {
-        path: "register",
-        element: <Register />
-      },
-      {
-        path: "login",
-        element: <Login />
+        path: "",
+        element: <HomeWrapper />,
+        children: [
+          {
+            path: "/",
+            element: <Home />
+          },
+          {
+            path: "register",
+            element: <Register />
+          },
+          {
+            path: "login",
+            element: <Login />
+          }
+        ]
       }
     ]
   },
   {
     path: "dashboard",
-    element: (
-      <ProtectedRoute>
-        <DashboardWrapper />
-      </ProtectedRoute>
-    )
+    element: <ProtectedRoute />,
+    loader: userLoaders.checkAuth,
+    children: [
+      {
+        path: "",
+        element: <DashboardWrapper />
+      }
+    ]
   }
 ])
 
 const App = () => {
-  return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App;

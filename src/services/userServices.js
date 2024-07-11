@@ -25,6 +25,9 @@ const userServices = {
     getUser: async () => {
         // make a GET request to the server
         return await protectedInstance.get('/users/profile');
+    },
+    checkAuth: async () => {
+        return await protectedInstance.get('/users/checkAuth');
     }
 }
 
