@@ -1,9 +1,10 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import userServices from "../services/userServices";
 
 const AdminDashboardWrapper = () => {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const user = useLoaderData();
 
   const handleLogout = () => {
     userServices.logout()
@@ -29,7 +30,7 @@ const AdminDashboardWrapper = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                <Link className="nav-link disabled" to="/">Welcome { }</Link>
+                <Link className="nav-link disabled" to="/">Welcome { user.data.user.name }</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" onClick={handleLogout}>Logout</Link>

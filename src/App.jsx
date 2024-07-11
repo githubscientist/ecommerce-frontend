@@ -42,7 +42,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <DashboardWrapper />
+        element: <DashboardWrapper />,
+        loader: userLoaders.getUser,
       }
     ]
   },
@@ -53,7 +54,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AdminDashboardWrapper />
+        element: <AdminDashboardWrapper />,
+        loader: userLoaders.getUser,
       }
     ]
   }
